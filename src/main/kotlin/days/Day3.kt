@@ -24,4 +24,12 @@ class Day3 : Day(3) {
         }
         return number.toLong()
     }
+
+    fun getMaximumJoltageGemini(bank: String, batteryNumber: Int): Long {
+        return (batteryNumber downTo 1).fold(0 to "") { (start, acc), remaining ->
+            val end = bank.length - remaining
+            val bestIndex = (start..end).maxByOrNull { bank[it] }!!
+            (bestIndex + 1) to (acc + bank[bestIndex])
+        }.second.toLong()
+    }
 }
